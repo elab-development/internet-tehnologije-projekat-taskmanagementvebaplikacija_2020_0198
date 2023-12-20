@@ -12,4 +12,10 @@ class ProjectController extends Controller
 
         return $projects;
     }
+
+    public function show($id){
+        $project=Project::find($id);
+
+        return $project;
+    }
 }
