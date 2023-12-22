@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TaskResource;
-use App\Models\Task;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks=Task::all();
+        $users=User::all();
 
        // return $tasks;
-       return  TaskResource::collection($tasks);
+       return  UserResource::collection($users);
     }
 
     /**
@@ -38,19 +38,15 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(User $user)
     {
-        
-        //$task=Task::find($id);
-
-        // return $tasks;
-        return  new TaskResource($task);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(User $user)
     {
         //
     }
@@ -58,7 +54,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -66,7 +62,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(User $user)
     {
         //
     }
