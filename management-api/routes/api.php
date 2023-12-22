@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTaskController;
@@ -70,5 +71,9 @@ Route::post('/updateuser/{id}',[UserController::class, 'update']);
 
 Route::delete('/deleteuser/{id}',[UserController::class, 'destroy']);
 
+Route::post('/register',[AuthController::class,'register']);
 
+Route::post('/login',[AuthController::class,'login']);
+
+Route::post('/logout',[AuthController::class,'logout']);
 
