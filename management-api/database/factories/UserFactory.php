@@ -23,6 +23,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $roleOption=['Admin','VIP korisnik','Korisnik'];
         return [
             'username' => fake()->name(),
             'firstname' => fake()->firstName(),
@@ -32,6 +33,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'role'=> fake()->randomElement($roleOption)
         ];
     }
 

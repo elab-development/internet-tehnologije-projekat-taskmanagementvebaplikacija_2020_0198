@@ -6,6 +6,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -34,6 +35,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         
+     $roleOption=['Admin','VIP korisnik','Korisnik'];
      $data = $request->all();
      $validator=Validator::make($data,[
         'username'=>'required',
@@ -41,13 +43,15 @@ class UserController extends Controller
         'lastname'=>'required',
         //'position'=>'required',
         'email'=>'required',
-        'password'=>'required'
+        'password'=>'required',
+        'role'=>['required', Rule::in($roleOption)],
      ],[
         'username.required'=>'Please give username',
         'firstname.required'=>'Please give user firstname',
         'lastname.required'=>'Please give user lastname',
         'email.required'=>'Please give user email',
-        'password.required'=>'Please give password'
+        'password.required'=>'Please give password',
+        'role.required'=>'Role:Admin, VIP korisnik, Korisnik'
      ]);
 
      if($validator->fails()){
@@ -100,6 +104,7 @@ class UserController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $roleOption=['Admin','VIP korisnik','Korisnik'];
         $validator=Validator::make($request->all(),[
             'username'=>'required|string',
             'firstname' => 'require|string',
@@ -107,6 +112,7 @@ class UserController extends Controller
             'position'=>'required|string',
             'email' => 'required|string|email',
             'password'=>'required|min:9',
+            'role'=>['required', Rule::in($roleOption)],
             
 
         ]);
@@ -124,7 +130,7 @@ class UserController extends Controller
         if(is_null($user)){
             return response()->json('User not found',404);
         }
-        
+
         $user->username=$request->username;
         $user->firstname=$request->firstname;
         $user->lastname=$request->lastname;

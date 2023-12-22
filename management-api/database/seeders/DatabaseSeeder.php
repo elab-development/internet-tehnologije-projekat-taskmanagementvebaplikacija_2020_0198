@@ -17,8 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //Category::truncate();
+        Category::truncate();
         Project::truncate();
+        User::truncate();
+        Task::truncate();
         //Project::factory(10)->create();
 
         
