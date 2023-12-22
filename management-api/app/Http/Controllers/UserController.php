@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -32,15 +33,58 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+     $data = $request->all();
+     $validator=Validator::make($data,[
+        'username'=>'required',
+        'firstname'=>'required',
+        'lastname'=>'required',
+        //'position'=>'required',
+        'email'=>'required',
+        'password'=>'required'
+     ],[
+        'username.required'=>'Please give username',
+        'firstname.required'=>'Please give user firstname',
+        'lastname.required'=>'Please give user lastname',
+        'email.required'=>'Please give user email',
+        'password.required'=>'Please give password'
+     ]);
+
+     if($validator->fails()){
+        return response()->json([
+            'success'=>false,
+            'message'=>$validator->getMessageBag()->first(),
+        ]);
+     }
+
+     $user = new User();
+     $user->username=$request->username;
+     $user->firstname=$request->firstname;
+     $user->lastname=$request->lastname;
+     $user->position=$request->position;
+     $user->email=$request->email;
+     $user->password=$request->password;
+     
+
+     $user->save();
+
+     return response()->json([
+        'success'=>true,
+        'message'=>'User saved',
+        'user'=> $user
+    ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user=User::find($id);
+        if(is_null($user)){
+            return response()->json('User not found',404);
+        }
+        return response()->json(new UserResource($user));
     }
 
     /**
@@ -54,16 +98,76 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,$id)
     {
-        //
+        $validator=Validator::make($request->all(),[
+            'username'=>'required|string',
+            'firstname' => 'require|string',
+            'lastname'=>'required|string',
+            'position'=>'required|string',
+            'email' => 'required|string|email',
+            'password'=>'required|min:9',
+            
+
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'success'=>false,
+                'message'=>$validator->errors()
+            ]);
+        }
+
+        $user=User::find($id);
+
+        
+        if(is_null($user)){
+            return response()->json('User not found',404);
+        }
+        
+        $user->username=$request->username;
+        $user->firstname=$request->firstname;
+        $user->lastname=$request->lastname;
+        $user->position=$request->position;
+        $user->email=$request->email;
+        $user->password=$request->password;
+        $user->save();
+
+        return response()->json([
+            'success'=>true,
+            'message'=>'User updated successfully',
+            'data'=> $user
+        ]);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+
+        $user=User::find($id);
+
+        if(is_null($user)){
+            return response()->json('User not found',404);
+        }
+
+
+        if($user->delete()){
+            return response()->json([
+            'success'=>true,
+            'message'=>'User deleted successfully',
+            
+           ]);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete user',
+            ], 500); // 500 označava Internal Server Error
+        }
+        
+
     }
 }

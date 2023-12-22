@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -16,24 +17,29 @@ class ProjectController extends Controller
 
     public function show($id){
         $project=Project::find($id);
-
-        return $project;
+        if(is_null($project)){
+            return response()->json('Project is not found',404);
+        }
+        return response()->json($project);
+        
     }
 
    public function store(Request $request) {
     
+    $priorityOptions=['low','medium','high'];
      $data = $request->all();
      $validator=Validator::make($data,[
         'name'=>'required',
         'status'=>'required',
         'description'=>'required',
         'start_date'=>'required',
-        'priority'=>'required',
+        'priority'=>['required', Rule::in($priorityOptions)],
         'category_id'=>'required'
      ],[
         'name.required'=>'Please give project name',
         'status.required'=>'Please give project status',
-        'description.required'=>'Please give project description'
+        'description.required'=>'Please give project description',
+        'priority.required'=>'Priority: low,medium,high'
      ]);
 
      if($validator->fails()){
@@ -64,13 +70,14 @@ class ProjectController extends Controller
 
     public function update(Request $request,$id) {
         
+        $priorityOptions=['low','medium','high'];
         $validator=Validator::make($request->all(),[
             'name'=>'required|string',
             'status' => 'required|in:0,1',
             'description'=>'required|string|max:255',
             'start_date'=>'required',
             'end_date' => 'required|date|after:start_date',
-            'priority'=>'required',
+            'priority'=> ['required', Rule::in($priorityOptions)],
             'category_id'=>'required'
 
         ]);
