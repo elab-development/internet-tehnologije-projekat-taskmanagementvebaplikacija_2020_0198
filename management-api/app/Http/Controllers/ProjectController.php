@@ -120,5 +120,10 @@ class ProjectController extends Controller
 
     }
 
+    public function filterByPriority($priority)  {
+        $filteredProject = Project::where('priority', $priority)->paginate(4); 
+
+        return response()->json($filteredProject);
+    }
 
 }

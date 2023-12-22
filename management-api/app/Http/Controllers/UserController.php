@@ -176,4 +176,10 @@ class UserController extends Controller
         
 
     }
+
+    public function filterByRole($role)  {
+        $filteredUser = User::where('role', $role)->paginate(2); 
+
+        return response()->json($filteredUser);
+    }
 }
