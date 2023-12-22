@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
  */
-class ProjectFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,15 +18,14 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
-        $priorityOptions=['low','medium','high'];
+
+       
         return [
             'name' => fake()->name(),
             'status' => fake()->boolean(),
             'description' => fake()->paragraph(),
-            'start_date' => fake()->date(),
-            'end_date' =>fake()->date(),
-            'priority'=>fake()->randomElement($priorityOptions),
-            'category_id'=>Category::factory()
+            'project_id' => Project::factory(),
+            'user_id'=>User::factory()
         ];
     }
 }
