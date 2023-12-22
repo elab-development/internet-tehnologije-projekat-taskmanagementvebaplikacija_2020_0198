@@ -73,7 +73,7 @@ Route::delete('/deleteuser/{id}',[UserController::class, 'destroy']);
 
 Route::post('/register',[AuthController::class,'register']);
 
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login',[AuthController::class,'login'])->name('getLogin');
 
 Route::post('/logout',[AuthController::class,'logout']);
 

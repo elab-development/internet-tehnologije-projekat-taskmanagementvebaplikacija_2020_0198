@@ -73,6 +73,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'User not authenticated'], 401);
         }
     }*/
+    
     /*public function logout(){
         auth()->user()->token->delete();
         return  [
@@ -80,5 +81,6 @@ class AuthController extends Controller
         ];
 
     }*/
+    
     
 }
