@@ -96,10 +96,10 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 });
 
 
-Route::post('/forgotpassworddd', [ForgotPasswordController::class, 'sendResetLink' ]);
+//Route::post('/forgotpassworddd', [ForgotPasswordController::class, 'sendResetLink' ]);
 
 
-Route::post('/passworddd/reset/{token}',[ ResetPasswordController::class,'reset']);
+//Route::post('/passworddd/reset/{token}',[ ResetPasswordController::class,'reset']);
 
 // Ruta za dobavljanje paginiranih rezultata
 Route::get('/taskspaginacija', [TaskController::class, 'index']);
@@ -111,5 +111,6 @@ Route::get('/projects/filter/{priority}', [ProjectController::class, 'filterByPr
 
 Route::get('/users/filter/{role}', [UserController::class, 'filterByRole']);
 
+Route::post('/forgotpassword',[AuthController::class,'forgotpassword']);
 
-
+Route::post('/resetpassword',[AuthController::class,'resetpassword']);

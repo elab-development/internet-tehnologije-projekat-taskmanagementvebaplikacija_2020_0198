@@ -80,5 +80,42 @@ class AuthController extends Controller
         ];
 
     }
+
+    public function forgotpassword(Request $request){
+        /*if(Auth::attempt($request->only('email')))
+            return response()->json(['Message'=>'Does not exist user with this email!'],401);*/
+        
+        $request->validate(['email'=>'required|email']);
+
+        
+        $user=User::where('email',$request['email'])->first();
+
+        if(is_null($user)){
+            return response()->json('User is not found',404);
+        }
+
+        $token=$user->createToken('auth_token')->plainTextToken;
+
+        //$token=$user->getToken();
+
+        return response()->json(['message'=>'Mail:  '.$user->email,'access_token'=>$token,'token_type'=>'Bearer']);
+    }
     
+    public function resetpassword(Request $request){
+        $validator=Validator::make($request->all(),[
+            'email'=>'required|email',
+            'password'=>'required|string|min:9',
+            'password_confirmation' => 'required|string|same:password',
+        ]);
+
+        if($validator->fails())
+           return response()->json($validator->errors());
+
+         $user=User::where('email',$request->email)->first();
+
+         $user->password=Hash::make($request->password);
+
+         $user->save();
+         return response()->json(['message'=>'Password changed successfully:  '.$user->email]);
+    }
 }
