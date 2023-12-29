@@ -68,7 +68,7 @@ class UserController extends Controller
      $user->position=$request->position;
      $user->email=$request->email;
      $user->password=$request->password;
-     
+     $user->role=$request->role;
 
      $user->save();
 
@@ -137,6 +137,7 @@ class UserController extends Controller
         $user->position=$request->position;
         $user->email=$request->email;
         $user->password=$request->password;
+        $user->role=$request->role;
         $user->save();
 
         return response()->json([
@@ -175,5 +176,11 @@ class UserController extends Controller
         }
         
 
+    }
+
+    public function filterByRole($role)  {
+        $filteredUser = User::where('role', $role)->paginate(2); 
+
+        return response()->json($filteredUser);
     }
 }

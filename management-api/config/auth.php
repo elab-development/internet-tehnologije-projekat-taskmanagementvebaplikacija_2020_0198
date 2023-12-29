@@ -40,6 +40,24 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'api'=> [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'admin'=> [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'vip'=> [
+            'driver' => 'session',
+            'provider' => 'vips',
+        ],
+        'korisnik'=> [
+            'driver' => 'session',
+            'provider' => 'korisnici',
+        ],
+
     ],
 
     /*
@@ -64,6 +82,32 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+            'table' => 'users',
+            'conditions' => [
+                'role' => 'Admin',
+            ],
+        ],
+        'vips' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+            'table' => 'users',
+            'conditions' => [
+                'role' => 'VIP korisnik',
+            ],
+        ],
+        'korisnici' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+            'table' => 'users',
+            'conditions' => [
+                'role' => 'Korisnik',
+            ],
+        ],
+
+        
 
         // 'users' => [
         //     'driver' => 'database',
