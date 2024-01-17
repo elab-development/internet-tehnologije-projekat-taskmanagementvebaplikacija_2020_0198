@@ -6,8 +6,8 @@ export function useUser() {
     const [user, setUser] = useState<User | undefined>(undefined);
     const [loading, setLoading] = useState(true);
 
-    const authUser = (path: string) => async (userData: any) => {
-        const res = await axios.post('/api/' + path, userData);
+    const login = async (userData: any) => {
+        const res = await axios.post('/api/login', userData);
         setUser(res.data.user);
         const token = res.data.access_token;
         localStorage.setItem('authToken', token);
@@ -26,6 +26,7 @@ export function useUser() {
         }
         let token = localStorage.getItem('authToken');
         if (!token) {
+            setLoading(false);
             return;
         }
         token = 'Bearer ' + token;
@@ -48,8 +49,7 @@ export function useUser() {
     return {
         user,
         loading,
-        register: authUser('register'),
-        login: authUser('login'),
+        login,
         logout
     }
 }
