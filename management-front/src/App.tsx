@@ -6,6 +6,7 @@ import LoginPage from './components/LoginPage';
 import Navbar from './components/Navbar';
 import ProjectHomePage from './components/ProjectHomePage';
 import { Category } from './model';
+import TasksPage from './components/TasksPage';
 
 function App() {
   const { user, loading, login, logout } = useUser();
@@ -24,12 +25,14 @@ function App() {
   }
   if (user.role === 'Admin') {
     return (
-      <div>
+      <div className='page'>
         <Navbar user={user} logout={logout} />
-        <Routes>
-          <Route path='*' element={<ProjectHomePage />} />
-          <Route path='/categories' element={<div>Categories</div>} />
-        </Routes>
+        <div className='page-content'>
+          <Routes>
+            <Route path='*' element={<ProjectHomePage />} />
+            <Route path='/tasks' element={<TasksPage />} />
+          </Routes>
+        </div>
       </div>
     )
   }

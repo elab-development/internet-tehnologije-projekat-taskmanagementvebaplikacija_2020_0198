@@ -14,10 +14,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //$tasks = Task::all();
-        $tasks = Task::paginate(3);
-        return response()->json($tasks);
-        //return  TaskResource::collection($tasks);
+        $tasks = Task::all();
+        // $tasks = Task::paginate(3);
+        // return response()->json($tasks);
+        return response()->json(TaskResource::collection($tasks));
     }
 
     /**

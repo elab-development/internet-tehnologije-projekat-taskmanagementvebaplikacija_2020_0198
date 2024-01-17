@@ -18,7 +18,7 @@ export default function Navbar(props: Props) {
                         <NavLink className='nav-link' to='/'>Projects</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className='nav-link' to='/categories'>Categories</NavLink>
+                        <NavLink className='nav-link' to='/tasks'>Tasks</NavLink>
                     </li>
                 </ul>
                 <div>
