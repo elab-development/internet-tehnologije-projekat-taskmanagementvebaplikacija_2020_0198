@@ -14,12 +14,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
+        $categories = Category::all();
 
         // return $tasks;
-        return  CategoryResource::collection($categories);
-        //return response()->json(CategoryResource::collection($categories)); 
-     }
+        // return  CategoryResource::collection($categories);
+        return response()->json(CategoryResource::collection($categories));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,30 +35,30 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-     $validator=Validator::make($data,[
-        'name'=>'required',
-     ],[
-        'name.required'=>'Please give category name',
-        
-     ]);
+        $validator = Validator::make($data, [
+            'name' => 'required',
+        ], [
+            'name.required' => 'Please give category name',
 
-     if($validator->fails()){
-        return response()->json([
-            'success'=>false,
-            'message'=>$validator->getMessageBag()->first(),
         ]);
-     }
 
-     $category = new Category();
-     $category->name=$request->name;
-     
-     $category->save();
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->getMessageBag()->first(),
+            ]);
+        }
 
-     return response()->json([
-        'success'=>true,
-        'message'=>'Category saved',
-        'data'=> $category
-    ]);
+        $category = new Category();
+        $category->name = $request->name;
+
+        $category->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Category saved',
+            'data' => $category
+        ]);
     }
 
     /**
@@ -66,12 +66,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category=Category::find($id);
-        if(is_null($category)){
-            return response()->json('Category is not found',404);
+        $category = Category::find($id);
+        if (is_null($category)) {
+            return response()->json('Category is not found', 404);
         }
         return response()->json($category);
-
     }
 
     /**
@@ -79,7 +78,6 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        
     }
 
     /**
@@ -87,26 +85,26 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator=Validator::make($request->all(),[
-            'name'=>'required|string',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
-                'success'=>false,
-                'message'=>$validator->errors()
+                'success' => false,
+                'message' => $validator->errors()
             ]);
         }
 
-        $category=Category::find($id);
-        $category->name=$request->name;
-        
+        $category = Category::find($id);
+        $category->name = $request->name;
+
         $category->save();
 
         return response()->json([
-            'success'=>true,
-            'message'=>'Category updated successfully',
-            'data'=> $category
+            'success' => true,
+            'message' => 'Category updated successfully',
+            'data' => $category
         ]);
     }
 
@@ -115,21 +113,20 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category=Category::find($id);
+        $category = Category::find($id);
 
-        if(is_null($category)){
-            return response()->json('Category not found',404);
+        if (is_null($category)) {
+            return response()->json('Category not found', 404);
         }
 
 
-        if($category->delete()){
+        if ($category->delete()) {
             return response()->json([
-            'success'=>true,
-            'message'=>'Category deleted successfully',
-            
-           ]);
-        }
-        else{
+                'success' => true,
+                'message' => 'Category deleted successfully',
+
+            ]);
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to delete category',

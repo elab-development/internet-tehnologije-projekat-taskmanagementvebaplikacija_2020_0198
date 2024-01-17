@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import { useUser } from './hooks';
+import { useGet, useUser } from './hooks';
 import { Route, Routes } from 'react-router';
 import LoginPage from './components/LoginPage';
+import Navbar from './components/Navbar';
+import ProjectHomePage from './components/ProjectHomePage';
+import { Category } from './model';
 
 function App() {
-  const { user, loading, login } = useUser();
-
+  const { user, loading, login, logout } = useUser();
   if (loading) {
     return null;
   }
@@ -23,10 +25,10 @@ function App() {
   if (user.role === 'Admin') {
     return (
       <div>
+        <Navbar user={user} logout={logout} />
         <Routes>
-          <Route path='*' element={<div>Projects</div>} />
+          <Route path='*' element={<ProjectHomePage />} />
           <Route path='/categories' element={<div>Categories</div>} />
-          <Route path='/project/:id' element={<div>Project</div>} />
         </Routes>
       </div>
     )

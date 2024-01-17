@@ -62,3 +62,18 @@ export function useUser() {
         logout
     }
 }
+
+export function useGet<T>(path: string) {
+    const [data, setData] = useState<T[]>([])
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        axios.get(path)
+            .then(res => setData(res.data))
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [path])
+    return {
+        data, loading
+    }
+}
