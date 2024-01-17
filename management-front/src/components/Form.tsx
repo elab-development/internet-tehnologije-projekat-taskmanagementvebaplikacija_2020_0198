@@ -90,10 +90,10 @@ function FormInput(props: InputProps) {
         {props.label && <label >{props.label}</label>}
         {
             props.textArea ? (
-                <textarea className={'form-control' + props.error ? ' is-invalid' : ''} required={props.required}
+                <textarea className={'form-control' + (props.error ? ' is-invalid' : '')} required={props.required}
                     value={value[props.name]} placeholder={props.placeholder} onChange={e => onChange(props.name, e.currentTarget.value)}></textarea>
             ) : (
-                <input className={'form-control' + props.error ? ' is-invalid' : ''} required={props.required} type={props.type}
+                <input className={'form-control' + (props.error ? ' is-invalid' : '')} required={props.required} type={props.type}
                     value={value[props.name]} placeholder={props.placeholder} onChange={e => onChange(props.name, e.currentTarget.value)} />
             )
         }

@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import { useUser } from './hooks';
 import { Route, Routes } from 'react-router';
+import LoginPage from './components/LoginPage';
 
 function App() {
-  const { user, loading } = useUser();
+  const { user, loading, login } = useUser();
 
   if (loading) {
     return null;
@@ -14,7 +15,7 @@ function App() {
     return (
       <div>
         <Routes>
-          <Route path='*' element={<div>Login</div>} />
+          <Route path='*' element={<LoginPage login={login} />} />
         </Routes>
       </div>
     )
