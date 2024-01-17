@@ -13,12 +13,12 @@ class CategoryResource extends JsonResource
      * @return array<string, mixed>
      */
 
-     public static $wrap='categories';
+    public static $wrap = 'categories';
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->resource->id,
-            'name'=>$this->resource->name,
+            'id' => $this->resource->id,
+            'name' => $this->resource->name,
         ];
     }
 }

@@ -13,18 +13,17 @@ class UserResource extends JsonResource
      * @return array<string, mixed>
      */
 
-    public static $wrap='user';
+    public static $wrap = 'user';
     public function toArray(Request $request)
     {
         return [
-            'id'=>$this->resource->id,
-            'username'=>$this->resource->username,
-            'firstname'=>$this->resource->firstname,
-            'lastname'=>$this->resource->lastname,
-            'position'=>$this->resource->position,
-            'email'=>$this->resource->email,
-            'password'=> $this->resource->password,
-            'role'=> $this->resource->role
+            'id' => $this->resource->id,
+            'username' => $this->resource->username,
+            'firstname' => $this->resource->firstname,
+            'lastname' => $this->resource->lastname,
+            'position' => $this->resource->position,
+            'email' => $this->resource->email,
+            'role' => $this->resource->role
         ];
     }
 }
