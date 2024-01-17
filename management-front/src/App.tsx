@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useUser } from './hooks';
+import { Route, Routes } from 'react-router';
 
 function App() {
+  const { user, loading } = useUser();
+
+  if (loading) {
+    return null;
+  }
+
+  if (!user) {
+    return (
+      <div>
+        <Routes>
+          <Route path='*' element={<div>Login</div>} />
+        </Routes>
+      </div>
+    )
+  }
+  if (user.role === 'Admin') {
+    return (
+      <div>
+        <Routes>
+          <Route path='*' element={<div>Projects</div>} />
+          <Route path='/categories' element={<div>Categories</div>} />
+          <Route path='/project/:id' element={<div>Project</div>} />
+        </Routes>
+      </div>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Trenutno postoji podrska samo za admin korisnike
     </div>
-  );
+  )
 }
 
 export default App;
