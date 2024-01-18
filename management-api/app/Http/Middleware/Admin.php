@@ -18,8 +18,8 @@ class Admin
     {
         if (Auth::user() &&  Auth::user()->role === 'Admin') {
             return $next($request);
-       }
+        }
 
-       return response()->json(['message'=>'You have not admin access']);
+        return response()->json(['message' => 'You have not admin access'], 403);
     }
 }

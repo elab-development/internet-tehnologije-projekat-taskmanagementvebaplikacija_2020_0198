@@ -74,6 +74,6 @@ export function useGet<T>(path: string) {
             })
     }, [path])
     return {
-        data, loading
+        data, loading, setData
     }
 }

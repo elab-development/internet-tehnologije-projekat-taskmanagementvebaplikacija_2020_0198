@@ -73,7 +73,6 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     //Route::get('/users/filter/{role}', [UserController::class, 'filterByRole']);
 
     //Route::get('/projects',[ProjectController::class, 'index']);
-    Route::post('/addprojects', [ProjectController::class, 'store'])->name('add.project');
     //Route::post('/updateprojects/{id}',[ProjectController::class, 'update']);
     Route::delete('/deleteprojects/{id}', [ProjectController::class, 'destroy']);
     // Route::resource('tasks',TaskController::class);
@@ -91,7 +90,9 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     //Route::post('/updateuser/{id}',[UserController::class, 'update']);
     Route::delete('/deleteuser/{id}', [UserController::class, 'destroy']);
 });
-
+Route::group(['middleware' => ['auth:sanctum', 'adminvip']], function () {
+    Route::post('/addprojects', [ProjectController::class, 'store'])->name('add.project');
+});
 Route::group(['middleware' => ['auth:sanctum', 'vip']], function () {
     //Route::get('/projects/{id}',[ProjectController::class, 'show']);
     //Route::get('/tasks/filter/{status}', [TaskController::class, 'filterByStatus']);
@@ -100,7 +101,6 @@ Route::group(['middleware' => ['auth:sanctum', 'vip']], function () {
     //Route::get('/projects/filter/{priority}', [ProjectController::class, 'filterByPriority']);
     //Route::get('/users/filter/{role}', [UserController::class, 'filterByRole']);
     //Route::get('/projects',[ProjectController::class, 'index']);
-    Route::post('/addprojects', [ProjectController::class, 'store'])->name('add.project');
     //Route::post('/updateprojects/{id}',[ProjectController::class, 'update']);
     // Route::resource('tasks',TaskController::class);
     /*Route::resource('users',UserController::class);

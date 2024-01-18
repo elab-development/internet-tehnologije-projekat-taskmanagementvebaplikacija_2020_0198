@@ -3,12 +3,14 @@ import { useGet } from '../hooks'
 import Header from './Header';
 import { Category, Project } from '../model';
 import { Link } from 'react-router-dom';
+import ProjectForm from './ProjectForm';
+import axios from 'axios';
 
 
 
 
 export default function ProjectHomePage() {
-    const { data: projects, loading } = useGet<Project>('/api/projects');
+    const { data: projects, loading, setData: setProjects } = useGet<Project>('/api/projects');
     const { data: categories } = useGet<Category>('/api/categories')
     if (loading) {
         return null;
@@ -50,7 +52,14 @@ export default function ProjectHomePage() {
                     </table>
                 </div>
                 <div className='col-4'>
-
+                    <ProjectForm
+                        categories={categories}
+                        onSubmit={async (val) => {
+                            const res = await axios.post('/api/addprojects', val);
+                            const project = res.data.data;
+                            setProjects(prev => [...prev, project]);
+                        }}
+                    />
                 </div>
             </div>
         </div>

@@ -18,8 +18,8 @@ class VIP
     {
         if (Auth::user() &&  Auth::user()->role === 'VIP korisnik') {
             return $next($request);
-       }
+        }
 
-       return response()->json(['message'=>'You have not VIP korisnik access']);
+        return response()->json(['message' => 'You have not VIP korisnik access'], 403);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class Korisnik
+class AdminOrVip
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,10 @@ class Korisnik
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if (Auth::user() &&  Auth::user()->role === 'Korisnik') {
+        if (Auth::user() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'VIP korisnik')) {
             return $next($request);
         }
 
-        return response()->json(['message' => 'You have not korisnik access'], 403);
+        return response()->json(['message' => 'You have not admin or vip access'], 403);
     }
 }

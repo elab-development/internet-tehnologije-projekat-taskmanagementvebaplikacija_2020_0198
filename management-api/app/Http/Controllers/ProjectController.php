@@ -46,10 +46,7 @@ class ProjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => $validator->getMessageBag()->first(),
-            ]);
+            return response()->json($validator->errors(), 400);
         }
 
         $project = new Project();
