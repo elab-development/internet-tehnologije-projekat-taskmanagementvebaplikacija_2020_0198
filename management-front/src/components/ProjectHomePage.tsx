@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGet } from '../hooks'
 import Header from './Header';
 import { Category, Project } from '../model';
@@ -12,6 +12,7 @@ import axios from 'axios';
 export default function ProjectHomePage() {
     const { data: projects, loading, setData: setProjects } = useGet<Project>('/api/projects');
     const { data: categories } = useGet<Category>('/api/categories')
+    const [selectedProject, setSelectedProject] = useState<Project | undefined>(undefined)
     if (loading) {
         return null;
     }
@@ -35,7 +36,16 @@ export default function ProjectHomePage() {
                             {
                                 projects.map(project => {
                                     return (
-                                        <tr key={project.id}>
+                                        <tr className={selectedProject === project ? "table-active" : ''}
+                                            onClick={() => {
+                                                setSelectedProject(prev => {
+                                                    if (prev === project) {
+                                                        return undefined;
+                                                    }
+                                                    return project;
+                                                })
+                                            }}
+                                            key={project.id}>
                                             <td>{project.id}</td>
                                             <td>{project.name}</td>
                                             <td>{project.status}</td>
@@ -53,11 +63,26 @@ export default function ProjectHomePage() {
                 </div>
                 <div className='col-4'>
                     <ProjectForm
+                        project={selectedProject}
                         categories={categories}
                         onSubmit={async (val) => {
-                            const res = await axios.post('/api/addprojects', val);
+                            if (!selectedProject) {
+                                const res = await axios.post('/api/addprojects', val);
+                                const project = res.data.data;
+                                setProjects(prev => [...prev, project]);
+                                return;
+                            }
+                            const res = await axios.post('/api/updateprojects/' + selectedProject.id, val);
                             const project = res.data.data;
-                            setProjects(prev => [...prev, project]);
+                            setProjects(prev => {
+                                return prev.map(val => {
+                                    if (val === selectedProject) {
+                                        return project
+                                    }
+                                    return val;
+                                })
+                            })
+                            setSelectedProject(undefined);
                         }}
                     />
                 </div>

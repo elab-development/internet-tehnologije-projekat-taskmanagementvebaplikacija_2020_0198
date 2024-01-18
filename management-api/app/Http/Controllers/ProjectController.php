@@ -83,10 +83,7 @@ class ProjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => $validator->errors()
-            ]);
+            return response()->json($validator->errors(), 400);
         }
 
         $project = Project::find($id);

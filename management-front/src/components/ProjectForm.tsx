@@ -1,20 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import Form from './Form'
-import { Category } from '../model'
+import { Category, Project } from '../model'
 import axios from 'axios'
 
 interface Props {
     onSubmit: (val: any) => any,
-    categories: Category[]
+    categories: Category[],
+    project?: Project
+}
+const initialForm = {
+    name: '',
+    description: '',
+    status: '',
+    start_date: '',
+    end_date: '',
+    priority: '',
+    category_id: '',
 }
 
 export default function ProjectForm(props: Props) {
-    const [errors, setErrors] = useState({} as any)
+    const [errors, setErrors] = useState({} as any);
+    const [formState, setFormState] = useState(initialForm as any)
+
+    useEffect(() => {
+        if (!props.project) {
+            setFormState(initialForm);
+            return;
+        }
+        setFormState({
+            name: props.project.name,
+            description: props.project.description,
+            status: props.project.status,
+            start_date: props.project.start_date,
+            end_date: props.project.end_date,
+            priority: props.project.priority,
+            category_id: props.project.category_id,
+        })
+    }, [props.project])
+
     return (
         <div>
-            <Header center content='Create project' />
-            <Form errors={errors} onSubmit={async val => {
+            <Header center content={props.project ? 'Edit project' : 'Create project'} />
+            <Form formValue={formState} onChange={setFormState} errors={errors} onSubmit={async val => {
                 try {
                     await props.onSubmit(val);
                 } catch (err) {
