@@ -31,7 +31,7 @@ export default function ProjectForm(props: Props) {
         setFormState({
             name: props.project.name,
             description: props.project.description,
-            status: props.project.status,
+            status: props.project.status == '1' ? 'Finished' : 'Active',
             start_date: props.project.start_date,
             end_date: props.project.end_date,
             priority: props.project.priority,
@@ -44,7 +44,10 @@ export default function ProjectForm(props: Props) {
             <Header center content={props.project ? 'Edit project' : 'Create project'} />
             <Form formValue={formState} onChange={setFormState} errors={errors} onSubmit={async val => {
                 try {
-                    await props.onSubmit(val);
+                    await props.onSubmit({
+                        ...val,
+                        status: val.status === 'Finished' ? '1' : '0'
+                    });
                 } catch (err) {
                     if (axios.isAxiosError(err)) {
                         setErrors(err.response?.data);
@@ -52,7 +55,7 @@ export default function ProjectForm(props: Props) {
                 }
             }}>
                 <Form.Input name='name' label='Name' placeholder='Name...' required />
-                <Form.Select name='status' label='Status' required data={[{ label: 'Finished', value: 1 }, { label: 'Active', value: 0 }]} />
+                <Form.Select name='status' label='Status' required data={[{ label: 'Finished', value: 'Finished' }, { label: 'Active', value: 'Active' }]} />
                 <Form.Input type='date' name='start_date' label='Start date' required />
                 <Form.Input type='date' name='end_date' label='End date' />
                 <Form.Select name='priority' label='Priority' required data={[

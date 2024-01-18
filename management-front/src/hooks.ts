@@ -14,9 +14,7 @@ export function useUser() {
             localStorage.setItem('authToken', token);
             axios.defaults.headers.common.Authorization = 'Bearer ' + token;
         } catch (error: any) {
-            console.log({ ...error })
             if (axios.isAxiosError(error)) {
-                console.log(error.response)
                 throw new Error(error.response?.data.message);
             }
             throw new Error('Unknown error')

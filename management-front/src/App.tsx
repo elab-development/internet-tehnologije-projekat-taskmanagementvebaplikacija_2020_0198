@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import { useGet, useUser } from './hooks';
+import { useUser } from './hooks';
 import { Route, Routes } from 'react-router';
 import LoginPage from './components/LoginPage';
 import Navbar from './components/Navbar';
 import ProjectHomePage from './components/ProjectHomePage';
-import { Category } from './model';
 import TasksPage from './components/TasksPage';
+import Header from './components/Header';
 
 function App() {
   const { user, loading, login, logout } = useUser();
@@ -27,6 +27,7 @@ function App() {
     return (
       <div className='page'>
         <Navbar user={user} logout={logout} />
+
         <div className='page-content'>
           <Routes>
             <Route path='*' element={<ProjectHomePage />} />
@@ -38,8 +39,9 @@ function App() {
   }
 
   return (
-    <div>
-      Trenutno postoji podrska samo za admin korisnike
+    <div className='page'>
+      <Navbar user={user} logout={logout} />
+      <Header center content='User is not admin' />
     </div>
   )
 }

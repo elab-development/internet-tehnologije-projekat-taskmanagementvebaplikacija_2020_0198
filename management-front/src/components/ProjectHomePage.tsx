@@ -48,7 +48,7 @@ export default function ProjectHomePage() {
                                             key={project.id}>
                                             <td>{project.id}</td>
                                             <td>{project.name}</td>
-                                            <td>{project.status}</td>
+                                            <td>{project.status == '1' ? 'Finished' : 'Active'}</td>
                                             <td>{project.description}</td>
                                             <td>{project.start_date}</td>
                                             <td>{project.end_date}</td>

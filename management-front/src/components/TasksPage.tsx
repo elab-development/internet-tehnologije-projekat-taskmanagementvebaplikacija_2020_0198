@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
-import Form from './Form'
 import { useGet } from '../hooks'
 import { Task } from '../model';
 
@@ -50,7 +49,7 @@ export default function TasksPage() {
                                 <tr key={task.id}>
                                     <td>{task.id}</td>
                                     <td>{task.name}</td>
-                                    <td>{task.status}</td>
+                                    <td>{task.status == '1' ? 'Finished' : 'Active'}</td>
                                     <td>{task.description}</td>
                                     <td>{task.project.name}</td>
                                     <td>{task.user.username}</td>
@@ -61,7 +60,7 @@ export default function TasksPage() {
                 </tbody>
             </table>
             <div className="btn-group mb-3" role="group" aria-label="First group">
-                <button type="button" className="btn btn-secondary" onClick={() => setPage(p => p - 1)}>Previous</button>
+                <button type="button" className="btn btn-secondary" disabled={page === 0} onClick={() => setPage(p => p - 1)}>Previous</button>
                 {
                     new Array(totalPages).fill(0).map((val, index) => {
                         return (
@@ -69,7 +68,7 @@ export default function TasksPage() {
                         )
                     })
                 }
-                <button type="button" className="btn btn-secondary" onClick={() => setPage(p => p + 1)}>Next</button>
+                <button type="button" className="btn btn-secondary" disabled={page === totalPages - 1} onClick={() => setPage(p => p + 1)}>Next</button>
             </div>
         </div>
     )
