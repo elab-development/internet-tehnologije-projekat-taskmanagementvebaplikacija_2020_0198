@@ -7,12 +7,14 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
-);
+); 
+//unutar root-a iscrtavamo nasu celu aplikaciju 
+//na ovaj nacin iscrtavamo sve react komponente iz App-a
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-    </BrowserRouter>
+    </BrowserRouter>  
   </React.StrictMode>
 );
 

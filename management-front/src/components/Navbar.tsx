@@ -20,6 +20,26 @@ export default function Navbar(props: Props) {
                     <li className="nav-item">
                         <NavLink className='nav-link' to='/tasks'>Tasks</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to='/categories'>Categories</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to='/users'>Users</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to='/reg'>Registration</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to='/signup'>SignUp</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to='/reset'>Reset password</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to='/forgot'>Forgot password</NavLink>
+                    </li>
+                    
+                    
                 </ul>
                 <div>
                     <span className="navbar-text mr-2">

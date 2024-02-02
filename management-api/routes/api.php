@@ -38,7 +38,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('getLogin');
 Route::post('/forgotpassword', [AuthController::class, 'forgotpassword']);
 Route::post('/resetpassword', [AuthController::class, 'resetpassword']);
-Route::post('/updateuser/{id}', [UserController::class, 'update']);
+Route::post('/updateusers/{id}', [UserController::class, 'update']);
 Route::post('/adduser', [UserController::class, 'store']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function (Request $request) {
@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/projects', [ProjectController::class, 'index']);
     Route::post('/updateprojects/{id}', [ProjectController::class, 'update']);
     //
+    
     Route::resource('tasks', TaskController::class);
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);

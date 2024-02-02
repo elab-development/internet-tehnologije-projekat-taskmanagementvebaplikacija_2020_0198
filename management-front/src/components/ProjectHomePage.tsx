@@ -37,12 +37,14 @@ export default function ProjectHomePage() {
                                 projects.map(project => {
                                     return (
                                         <tr className={selectedProject === project ? "table-active" : ''}
+                                        //Ako je trenutni projekat (selectedProject) jednak trenutnom projektu u iteraciji, 
+                                        //dodaje se klasa "table-active" kako bi se naglasilo da je taj red aktivan (selektovan).
                                             onClick={() => {
                                                 setSelectedProject(prev => {
                                                     if (prev === project) {
-                                                        return undefined;
+                                                        return undefined; //za deselect 
                                                     }
-                                                    return project;
+                                                    return project; //za select 
                                                 })
                                             }}
                                             key={project.id}>

@@ -3,12 +3,12 @@ import Header from './Header'
 import { useGet } from '../hooks'
 import { Task } from '../model';
 
-const SIZE = 10;
+const SIZE = 10;  ///zbog paginacije 
 
 export default function TasksPage() {
     const [search, setSearch] = useState('')
     const searchLower = search.toLowerCase();
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(0); 
     const { data: tasks } = useGet<Task>('/api/tasks');
     const filteredTasks = tasks.filter(task => {
         return task.name.toLowerCase().includes(searchLower) ||
@@ -23,11 +23,11 @@ export default function TasksPage() {
                 <input
                     type="text"
                     className='form-control'
-                    placeholder='Search...'
+                    placeholder='Search...' //ovo je da nam pise search pre nego sto krenemo da kucamo 
                     value={search}
                     onChange={e => {
-                        setSearch(e.currentTarget.value);
-                        setPage(0);
+                        setSearch(e.currentTarget.value); //menjamo stanje search-a na trenutno unetu vrednost
+                        setPage(0); 
                     }}
                 />
             </div>
@@ -44,7 +44,10 @@ export default function TasksPage() {
                 </thead>
                 <tbody>
                     {
+                        //page * SIZE označava početak podskupa, a SIZE * (page + 1) označava kraj podskupa. 
+                        //page je trenutna stranica, a SIZE je broj elemenata po stranici.
                         filteredTasks.slice(page * SIZE, SIZE * (page + 1)).map(task => {
+                            //map -Ovaj deo koda prolazi kroz svaki zadatak u rezultujućem podskupu i za svaki zadatak kreira red u tabeli.
                             return (
                                 <tr key={task.id}>
                                     <td>{task.id}</td>

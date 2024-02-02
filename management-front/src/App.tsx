@@ -7,10 +7,21 @@ import Navbar from './components/Navbar';
 import ProjectHomePage from './components/ProjectHomePage';
 import TasksPage from './components/TasksPage';
 import Header from './components/Header';
+import CategoryPage from './components/CategoryPage';
+import UserPage from './components/UserPage';
+import Register from './components/Register';
+import SignUpPage from './components/SignUpPage';
+import ResetPassword from './components/ResetPasswordPage';
+import ForgotPassword from './components/ForgotPassword';
+
+
 
 function App() {
-  const { user, loading, login, logout } = useUser();
+
+  const { user, loading, login, register, logout } = useUser();
+
   if (loading) {
+
     return null;
   }
 
@@ -32,7 +43,14 @@ function App() {
           <Routes>
             <Route path='*' element={<ProjectHomePage />} />
             <Route path='/tasks' element={<TasksPage />} />
+            <Route path='/categories' element={<CategoryPage />} />
+            <Route path='/users' element={<UserPage />} />
+            <Route path='/reg' element={<Register />} />
+            <Route path='/signup' element={<SignUpPage register={register} />} />
+            <Route path='/reset' element={<ResetPassword  />} />
+            <Route path='/forgot' element={<ForgotPassword  />} />
           </Routes>
+
         </div>
       </div>
     )
@@ -44,6 +62,7 @@ function App() {
       <Header center content='User is not admin' />
     </div>
   )
+
 }
 
 export default App;

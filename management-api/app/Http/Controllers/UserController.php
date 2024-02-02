@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
+
+
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +20,8 @@ class UserController extends Controller
         $users=User::all();
 
        // return $tasks;
-       return  UserResource::collection($users);
+       return response()->json(UserResource::collection($users));
+       //return  UserResource::collection($users);
     }
 
     /**
@@ -107,11 +110,11 @@ class UserController extends Controller
         $roleOption=['Admin','VIP korisnik','Korisnik'];
         $validator=Validator::make($request->all(),[
             'username'=>'required|string',
-            'firstname' => 'require|string',
+            'email' => 'required|string|email',
+            'firstname' => 'required|string',
             'lastname'=>'required|string',
             'position'=>'required|string',
-            'email' => 'required|string|email',
-            'password'=>'required|min:9',
+            //'password'=>'required|min:9',
             'role'=>['required', Rule::in($roleOption)],
             
 
@@ -132,18 +135,18 @@ class UserController extends Controller
         }
 
         $user->username=$request->username;
+        $user->email=$request->email;
         $user->firstname=$request->firstname;
         $user->lastname=$request->lastname;
         $user->position=$request->position;
-        $user->email=$request->email;
-        $user->password=$request->password;
+        //$user->password=$request->password;
         $user->role=$request->role;
         $user->save();
 
         return response()->json([
             'success'=>true,
             'message'=>'User updated successfully',
-            'data'=> $user
+            'data' => new UserResource($user)
         ]);
 
     }

@@ -23,8 +23,9 @@ export default function ProjectForm(props: Props) {
     const [errors, setErrors] = useState({} as any);
     const [formState, setFormState] = useState(initialForm as any)
 
+    //useEffect izvršiti svaki put kada se vrednost props.project promeni
     useEffect(() => {
-        if (!props.project) {
+        if (!props.project) {  //ako je null 
             setFormState(initialForm);
             return;
         }
@@ -44,9 +45,9 @@ export default function ProjectForm(props: Props) {
             <Header center content={props.project ? 'Edit project' : 'Create project'} />
             <Form formValue={formState} onChange={setFormState} errors={errors} onSubmit={async val => {
                 try {
-                    await props.onSubmit({
+                    await props.onSubmit({ //poziva se nad props-om funkcija on submit sa vrednostima koje su trenutno unete u val 
                         ...val,
-                        status: val.status === 'Finished' ? '1' : '0'
+                        status: val.status === 'Finished' ? '1' : '0' //ovde se vrsi konverzijaa jer je nama inace u bazi i na serveru 0,1 umesto finished i active
                     });
                 } catch (err) {
                     if (axios.isAxiosError(err)) {
