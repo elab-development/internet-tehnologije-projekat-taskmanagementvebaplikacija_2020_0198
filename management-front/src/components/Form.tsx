@@ -92,6 +92,7 @@ interface InputProps {
     label?: string,
     textArea?: boolean,
     placeholder?: string
+    
 }
 function FormInput(props: InputProps) {
     const { value, onChange, errors } = useFormContext();
