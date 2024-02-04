@@ -40,6 +40,7 @@ Route::post('/forgotpassword', [AuthController::class, 'forgotpassword']);
 Route::post('/resetpassword', [AuthController::class, 'resetpassword']);
 Route::post('/updateusers/{id}', [UserController::class, 'update']);
 Route::post('/adduser', [UserController::class, 'store']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function (Request $request) {
         return auth()->user();
@@ -95,24 +96,14 @@ Route::group(['middleware' => ['auth:sanctum', 'adminvip']], function () {
     Route::post('/addprojects', [ProjectController::class, 'store'])->name('add.project');
 });
 Route::group(['middleware' => ['auth:sanctum', 'vip']], function () {
-    //Route::get('/projects/{id}',[ProjectController::class, 'show']);
-    //Route::get('/tasks/filter/{status}', [TaskController::class, 'filterByStatus']);
+
     Route::get('/projects/{id}', [ProjectController::class, 'show']);
     Route::get('/tasks/filter/{status}', [TaskController::class, 'filterByStatus']);
-    //Route::get('/projects/filter/{priority}', [ProjectController::class, 'filterByPriority']);
-    //Route::get('/users/filter/{role}', [UserController::class, 'filterByRole']);
-    //Route::get('/projects',[ProjectController::class, 'index']);
-    //Route::post('/updateprojects/{id}',[ProjectController::class, 'update']);
-    // Route::resource('tasks',TaskController::class);
-    /*Route::resource('users',UserController::class);
-    Route::resource('categories',CategoryController::class);
-    Route::get('/projects/{id}/tasks',[ProjectTaskController::class,'index'])->name('projects.tasks.index');
-    Route::resource('projects.tasks',ProjectTaskController::class)->only(['index']);
-    Route::get('/categories/{id}',[CategoryController::class, 'show']);*/
+   
     Route::post('/addcategory', [CategoryController::class, 'store']);
     //Route::post('/updatecategory/{id}',[CategoryController::class, 'update']);
     Route::post('/addtask', [TaskController::class, 'store']);
-    //Route::post('/updatetask/{id}',[TaskController::class, 'update']);
+   
 
 
 });
