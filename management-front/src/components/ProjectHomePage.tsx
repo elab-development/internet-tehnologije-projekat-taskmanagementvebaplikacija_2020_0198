@@ -8,11 +8,21 @@ import axios from 'axios';
 
 
 
-
 export default function ProjectHomePage() {
+   
+    
     const { data: projects, loading, setData: setProjects } = useGet<Project>('/api/projects');
     const { data: categories } = useGet<Category>('/api/categories')
     const [selectedProject, setSelectedProject] = useState<Project | undefined>(undefined)
+    const handleDelete = async () => {
+        if (window.confirm('Are you sure you want to delete this project?')) {
+            if (selectedProject) {
+                await axios.delete('/api/deleteprojects/' + selectedProject.id);
+                setProjects((prev: Project[]) => prev.filter(p => p.id !== selectedProject.id));
+                setSelectedProject(undefined);
+            }
+        }
+    };
     if (loading) {
         return null;
     }
@@ -67,6 +77,7 @@ export default function ProjectHomePage() {
                     <ProjectForm
                         project={selectedProject}
                         categories={categories}
+                        onDelete={handleDelete}
                         onSubmit={async (val) => {
                             if (!selectedProject) {
                                 const res = await axios.post('/api/addprojects', val);

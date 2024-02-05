@@ -3,11 +3,14 @@ import Header from './Header'
 import Form from './Form'
 import { Category, Project } from '../model'
 import axios from 'axios'
+import './projectstyle.css';
+
 
 interface Props {
     onSubmit: (val: any) => any,
     categories: Category[],
-    project?: Project
+    project?: Project,
+    onDelete: () => void
 }
 const initialForm = {
     name: '',
@@ -82,7 +85,12 @@ export default function ProjectForm(props: Props) {
                     })}
                 />
                 <Form.Input textArea name='description' label='Description' required />
-                <button className='btn btn-secondary mt-2'>Save</button>
+                <div className='button-container'>
+                    <button className='btn btn-secondary save-button'>Save</button>
+                    <button className='btn btn-danger delete-button' onClick={() => props.onDelete()}>
+                        Delete
+                    </button>
+                </div>
             </Form>
         </div>
     )

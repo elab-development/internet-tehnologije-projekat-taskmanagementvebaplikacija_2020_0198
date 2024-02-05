@@ -1,0 +1,13 @@
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Raspodela prostora između Save i Delete dugmeta */
+    margin-top: 20px; /* Prilagodite razmak između dugmadi prema potrebi */
+}
+
+.save-button {
+    background-color: #007bff; /* Boja Save dugmeta */
+}
+
+.delete-button {
+    background-color: #dc3545; /* Boja Delete dugmeta */
+}
