@@ -15,11 +15,14 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         {user ? (
           <>
-            <NavLink className='navbar-brand' to='/'>Admin panel</NavLink>
+            <NavLink className='navbar-brand' to='/'>Home</NavLink>
             <div className="collapse navbar-collapse d-flex- justify-content-between align-items-center">
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <NavLink className='nav-link' to='/'>Projects</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className='nav-link' to='/kanban'>Kanban board</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className='nav-link' to='/tasks'>Tasks</NavLink>
