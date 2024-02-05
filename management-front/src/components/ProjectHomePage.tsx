@@ -9,8 +9,8 @@ import axios from 'axios';
 
 
 export default function ProjectHomePage() {
-   
-    
+
+
     const { data: projects, loading, setData: setProjects } = useGet<Project>('/api/projects');
     const { data: categories } = useGet<Category>('/api/categories')
     const [selectedProject, setSelectedProject] = useState<Project | undefined>(undefined)
@@ -31,6 +31,7 @@ export default function ProjectHomePage() {
             <Header center content='Projects' />
             <div className='row'>
                 <div className='col-8'>
+                    
                     <table className='table'>
                         <thead>
                             <th>ID</th>
@@ -47,8 +48,8 @@ export default function ProjectHomePage() {
                                 projects.map(project => {
                                     return (
                                         <tr className={selectedProject === project ? "table-active" : ''}
-                                        //Ako je trenutni projekat (selectedProject) jednak trenutnom projektu u iteraciji, 
-                                        //dodaje se klasa "table-active" kako bi se naglasilo da je taj red aktivan (selektovan).
+                                            //Ako je trenutni projekat (selectedProject) jednak trenutnom projektu u iteraciji, 
+                                            //dodaje se klasa "table-active" kako bi se naglasilo da je taj red aktivan (selektovan).
                                             onClick={() => {
                                                 setSelectedProject(prev => {
                                                     if (prev === project) {

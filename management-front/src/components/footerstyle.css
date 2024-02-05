@@ -1,0 +1,15 @@
+.footer {
+    background-color: #f0f0f0; /* Sivkasta pozadina - možete prilagoditi boju prema potrebi */
+    padding: 10px; /* Dodajte padding po potrebi */
+    text-align: center; /* Centrirajte sadržaj unutar Footer-a */
+  }
+
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .social-buttons .btn svg {
+    font-size: 24px; /* Promenite veličinu prema potrebi */
+  }
