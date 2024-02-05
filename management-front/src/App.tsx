@@ -54,11 +54,9 @@ function App() {
                 </Routes>
 
               </div>
-              <Routes>
-              <Route path='/twitter' element={<Footer />} />
-            </Routes>
+              
             </div>
-            
+           <Footer />
            
 
           </>
