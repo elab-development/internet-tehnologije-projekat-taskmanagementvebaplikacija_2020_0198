@@ -90,9 +90,9 @@ class AuthController extends Controller
 
         $token=$user->createToken('auth_token')->plainTextToken;
 
-        $resetLink = url("/resetpassword/{$token}");
+        //$resetLink = url("/resetpassword/{$token}");
 
-        \Mail::to($user->email)->send(new \App\Mail\ResetPasswordMail($resetLink));
+        //\Mail::to($user->email)->send(new \App\Mail\ResetPasswordMail($resetLink));
 
         //$token=$user->getToken();
 
