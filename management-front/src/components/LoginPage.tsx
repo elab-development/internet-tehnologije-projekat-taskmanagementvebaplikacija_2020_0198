@@ -44,8 +44,8 @@ export default function LoginPage() {
 
             </form>
 
-            <Link to='/reset'>
-            <button className="custom-link-style">Reset password</button>
+            <Link to='/forgot'>
+            <button className="custom-link-style">Forgot password</button>
             </Link>
 
             

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const ResetPassword = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const ResetPassword = () => {
       });
 
       setMessage(response.data.message);
+      navigate('/login')
     } catch (error) {
         if (axios.isAxiosError(error)) {
           throw new Error(error.response?.data.message);

@@ -1,12 +1,14 @@
 // ForgotPassword.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ const ForgotPassword = () => {
       });
 
       setMessage(response.data.message);
+      navigate('/reset')
     } catch (error) {
         if (axios.isAxiosError(error)) {
           throw new Error(error.response?.data.message);

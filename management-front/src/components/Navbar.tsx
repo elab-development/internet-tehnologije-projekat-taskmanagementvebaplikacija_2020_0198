@@ -21,8 +21,9 @@ export default function Navbar() {
                 <li className="nav-item">
                   <NavLink className='nav-link' to='/'>Projects</NavLink>
                 </li>
+                
                 <li className="nav-item">
-                  <NavLink className='nav-link' to='/kanban'>Kanban board</NavLink>
+                  <NavLink className='nav-link' to='/kanbanboard'>Kanban board </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className='nav-link' to='/tasks'>Tasks</NavLink>
@@ -33,9 +34,7 @@ export default function Navbar() {
                 <li className="nav-item">
                   <NavLink className='nav-link' to='/users'>Users</NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className='nav-link' to='/forgot'>Forgot password</NavLink>
-                </li>
+               
               </ul>
               <div>
                 <span className="navbar-text mr-2">

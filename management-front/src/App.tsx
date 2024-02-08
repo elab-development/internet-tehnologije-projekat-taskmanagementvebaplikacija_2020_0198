@@ -13,8 +13,8 @@ import ResetPassword from './components/ResetPasswordPage';
 import ForgotPassword from './components/ForgotPassword';
 import RegisterPage from './components/RegisterPage';
 import Footer from './components/Footer';
-import KanbanPage from './components/KanbanPage';
 
+import KanbanBoardPage from './components/KanbanBoardPage';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/reset' element={<ResetPassword />} />
+              <Route path='/forgot' element={<ForgotPassword />} />
             </Routes>
           </>
 
@@ -50,8 +51,9 @@ function App() {
                   <Route path='/tasks' element={<TasksPage />} />
                   <Route path='/categories' element={<CategoryPage />} />
                   <Route path='/users' element={<UserPage />} />
-                  <Route path='/kanban' element={<KanbanPage />} />
-                  <Route path='/forgot' element={<ForgotPassword />} />
+                  
+                  <Route path='/kanbanboard' element={<KanbanBoardPage/>} />
+                 
                 </Routes>
 
               </div>
