@@ -15,6 +15,8 @@ import RegisterPage from './components/RegisterPage';
 import Footer from './components/Footer';
 
 import KanbanBoardPage from './components/KanbanBoardPage';
+import Kalendar from './components/KalendarPage';
+import KalendarPage from './components/KalendarPage';
 
 
 function App() {
@@ -53,7 +55,7 @@ function App() {
                   <Route path='/users' element={<UserPage />} />
                   
                   <Route path='/kanbanboard' element={<KanbanBoardPage/>} />
-                 
+                  <Route path='/kalendar' element={<KalendarPage/>} />
                 </Routes>
 
               </div>

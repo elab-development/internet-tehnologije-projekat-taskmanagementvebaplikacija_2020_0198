@@ -1,0 +1,34 @@
+.container {
+    margin-top: 20px;
+  }
+  .column-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  .column {
+    flex: 1;
+    margin: 0 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+  }
+  .task {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  .task p {
+    margin: 0;
+  }
+  .active-column {
+    background-color: #F4C2C2; /* Jedna boja za active kolonu */
+  }
+  .finished-column {
+    background-color: #C2DBF4; /* Jedna boja za finished kolonu */
+  }
+  .task:nth-child(odd) {
+    background-color: #f0f0f0; /* Svaki drugi red drugačije svijetle boje */
+  }

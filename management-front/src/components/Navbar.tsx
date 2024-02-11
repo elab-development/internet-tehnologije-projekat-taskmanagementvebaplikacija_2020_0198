@@ -26,6 +26,9 @@ export default function Navbar() {
                   <NavLink className='nav-link' to='/kanbanboard'>Kanban board </NavLink>
                 </li>
                 <li className="nav-item">
+                  <NavLink className='nav-link' to='/kalendar'>Calendar </NavLink>
+                </li>
+                <li className="nav-item">
                   <NavLink className='nav-link' to='/tasks'>Tasks</NavLink>
                 </li>
                 <li className="nav-item">
